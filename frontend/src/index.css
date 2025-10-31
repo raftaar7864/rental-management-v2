@@ -1,0 +1,305 @@
+/* src/index.css
+   Cleaned and consolidated stylesheet:
+   - full-page flex layout helpers
+   - room/grid helpers & scroll fixes
+   - visual components (coin, receipt, filter-card)
+   - improved Login card + watermark styles
+   - consolidated animations & responsive rules
+*/
+
+/* ---------- Base / page layout ---------- */
+:root {
+  --bg: #dededd;
+  --primary: #4f46e5;
+  --muted: #6b7280;
+  --card-shadow: 0 8px 28px rgba(6, 10, 32, 0.06);
+  --glass-bg: linear-gradient(180deg, rgba(255,255,255,0.86), rgba(255,255,255,0.76));
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color: var(--bg);
+  font-size: 0.9rem;
+  color: #111827;
+}
+
+/* Full-height page container for dashboards/pages */
+.page-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 12px;
+  box-sizing: border-box;
+  background-color: transparent;
+}
+.page-header { flex: 0 0 auto; }
+.page-content {
+  flex: 1 1 auto;
+  min-height: 0; /* critical so children can scroll */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Room grid & scroll helpers ---------- */
+.rooms-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.rooms-card .card-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 1rem;
+}
+.rooms-scroll {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  padding-top: 6px;
+}
+.search-input { max-width: 420px; width: 100%; min-width: 0; }
+.room-col > .card { height: 100%; }
+
+/* ---------- Global UI tweaks & accessibility ---------- */
+.container, .card, .table, .form-control, .btn { font-size: 0.9rem !important; }
+.card-title { font-size: 1rem !important; }
+.navbar { font-size: 0.9rem !important; }
+.navbar .nav-link { padding: 0.3rem 0.7rem !important; }
+.navbar-brand { font-size: 1rem !important; }
+.navbar button, .navbar .btn { font-size: 0.85rem !important; padding: 0.35rem 0.75rem !important; }
+.main-content { padding: 2rem; }
+.card { border-radius: 0.5rem; }
+.table tbody tr:hover { background-color: #f1f3f5; }
+
+/* Make controls slightly rounded & focus-visible */
+.form-control, .btn { border-radius: 0.5rem; }
+.form-control:focus, .btn:focus, a:focus {
+  box-shadow: 0 0 0 3px rgba(100,150,220,0.16);
+  outline: none;
+}
+
+/* ---------- Coin, receipt & decorative visuals ---------- */
+.coin-container, .receipt-container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  perspective: 800px;
+}
+.coin, .drop-coin {
+  width: 25px;
+  height: 25px;
+  background: radial-gradient(circle at 30% 30%, gold, orange);
+  border-radius: 50%;
+  box-shadow: 0 0 8px #ffd700;
+  position: absolute;
+}
+.receipt {
+  width: 180px;
+  height: 100px;
+  background: #fff;
+  border: 2px solid #3399cc;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* filter-card and shadow-sm */
+.filter-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+  background: linear-gradient(145deg, #a9dfe7, #6db0b5);
+}
+.shadow-sm {
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ced4da;
+  background-color: #ffffff;
+  font-weight: 500;
+  color: #495057;
+  transition: all 0.3s ease;
+}
+.icon-circle {
+  width: 45px; height: 45px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.4rem; box-shadow: inset 0 0 10px rgba(102,37,86,0.08);
+}
+
+/* ---------- Progress & circular visuals ---------- */
+.circular-progress {
+  width: 74px; height: 74px; border-radius: 50%;
+  display: inline-grid; place-items: center;
+  background: conic-gradient(rgba(40,167,69,0.9) 0deg, rgba(255,255,255,0.08) 0deg);
+  box-shadow: inset 0 -6px 12px rgba(0,0,0,0.08), 0 8px 20px rgba(2,6,23,0.25);
+}
+.circular-center {
+  width: 58px; height: 58px; border-radius: 50%;
+  background: rgba(255,255,255,0.94);
+  display: flex; align-items: center; justify-content: center; flex-direction: column;
+}
+
+/* ---------- Dropdown icon spin animation ---------- */
+@keyframes icon-spin { to { transform: rotate(360deg); } }
+.icon-dropdown-wrapper .spin { animation: icon-spin 420ms cubic-bezier(.2,.8,.2,1); }
+
+/* dropdown menu animation */
+.icon-dropdown-menu {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+.icon-dropdown-menu.enter {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* remove default caret on custom icon dropdowns */
+.icon-dropdown-toggle .btn { padding: 0; }
+.icon-dropdown-toggle::after { display: none !important; }
+
+/* ---------- Login page & watermark (modern design) ---------- */
+.login-root {
+  width: 100vw;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #f6fbff 0%, #eef4ff 100%);
+  position: relative;
+  z-index: 0;
+}
+
+.watermark-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 520px;
+  max-width: 64vw;
+  transform: translate(-50%, -50%) rotate(-4deg);
+  opacity: 0.06;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Login card (glass style) */
+.login-card {
+  width: calc(100% - 36px);
+  max-width: 520px;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 12px 40px rgba(10, 20, 40, 0.08);
+  background: var(--glass-bg);
+  z-index: 2;
+  box-sizing: border-box;
+}
+.login-card.glass { backdrop-filter: blur(6px) saturate(120%); }
+
+.login-header { margin-bottom: 12px; }
+.logo-and-title { display: flex; gap: 12px; align-items: center; }
+.logo-bubble {
+  width: 46px; height: 46px; border-radius: 10px; display: grid; place-items: center;
+  background: linear-gradient(180deg, #eef2ff, #e2e8f0); color: #3f3d56; box-shadow: 0 6px 18px rgba(60,72,88,0.06);
+}
+.title { margin: 0; font-size: 1.1rem; line-height: 1; color: #0f172a; }
+.subtitle { font-size: 0.85rem; color: var(--muted); }
+
+/* form fields & labels */
+.login-form { margin-top: 6px; }
+.field { display: block; margin-bottom: 12px; }
+.field-label {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 6px;
+  font-size: 0.82rem; color: #475569;
+}
+.field-icon { opacity: 0.8; color: #475569; }
+.field input {
+  width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid #e6eef8;
+  background: #fff; box-sizing: border-box; font-size: 0.95rem; outline: none;
+  transition: box-shadow 160ms ease, border-color 160ms ease;
+}
+.field input:focus { box-shadow: 0 6px 18px rgba(14,165,233,0.1); border-color: #60a5fa; }
+.pw-toggle { margin-left: auto; border: none; background: transparent; cursor: pointer; padding: 4px; display: inline-flex; align-items: center; color: #475569; }
+
+/* remember/forgot row */
+.row-between { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.remember { font-size: 0.9rem; color: #475569; display: inline-flex; align-items: center; gap: 8px; }
+.remember input { transform: translateY(1px); }
+.link-like { background: transparent; border: none; color: #2563eb; text-decoration: underline; cursor: pointer; font-size: 0.9rem; }
+
+/* submit & spinner */
+.submit-btn {
+  width: 100%; display: inline-flex; justify-content: center; align-items: center; gap: 8px;
+  padding: 10px 14px; border-radius: 10px; border: none; font-weight: 600;
+  color: #fff; background: linear-gradient(90deg,#4f46e5,#6366f1);
+  cursor: pointer; box-shadow: 0 6px 18px rgba(79,70,229,0.16); margin-bottom: 12px;
+}
+.submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+.spinner {
+  width: 18px; height: 18px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: rgba(255,255,255,0.95); animation: spin 0.9s linear infinite; display: inline-block;
+}
+
+/* divider and socials */
+.divider { display:flex; align-items:center; gap:12px; color:#94a3b8; font-size:0.82rem; margin:8px 0 12px; }
+.divider::before, .divider::after { content:""; height:1px; background:linear-gradient(90deg,transparent,#e6eef8,transparent); flex:1; }
+.social-row { display:flex; gap:8px; margin-bottom:12px; }
+.social-btn {
+  flex:1; display:inline-flex; gap:8px; align-items:center; justify-content:center; padding:8px 10px; border-radius:10px;
+  border:1px solid #e6eef8; background:#fff; cursor:pointer; font-weight:600; color:#111827;
+}
+.social-btn.github { background:#0f172a; color:#fff; border:none; }
+.social-btn.card { background:linear-gradient(90deg,#fff,#f8fafc); }
+
+/* misc */
+.signup-note { margin-top: 6px; text-align: center; color: #64748b; font-size: 0.85rem; }
+.error-box {
+  background: rgba(220,38,38,0.06); color: #b91c1c; border-radius: 8px; padding: 8px 10px;
+  margin-bottom: 8px; font-weight: 600; font-size: 0.92rem; border: 1px solid rgba(220,38,38,0.08);
+}
+
+/* ---------- Generic responsive tweaks ---------- */
+@media (max-width: 768px) {
+  .sidebar { width: 100%; }
+  .search-input { max-width: 100%; }
+}
+
+@media (max-width: 575.98px) {
+  /* compact login card on xs */
+  .login-card { width: calc(100% - 20px); margin: 14px; padding: 14px; max-width: 420px; }
+  .watermark-center { display: none; }
+  .logo-bubble { width: 44px; height: 44px; }
+  .title { font-size: 1rem; }
+  .subtitle { font-size: 0.82rem; }
+  .social-row { flex-direction: column; }
+  .social-btn { width: 100%; justify-content: flex-start; padding-left: 12px; }
+  .content-padding { padding-left: 8px; padding-right: 8px; }
+}
+
+/* ---------- Animations ---------- */
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes spin-y { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+
+/* ---------- Small utility classes ---------- */
+.fullwidth-no-margin {
+  width: 100vw; min-height: 100vh; padding: 0; margin: 0; overflow-x: hidden; position: relative;
+  display:flex; align-items:center; justify-content:center; background: linear-gradient(180deg,#f6fbff 0%,#eef4ff 100%);
+}
+.content-padding { padding-left: 12px; padding-right: 12px; box-sizing: border-box; }
+.fullwidth-card { width: calc(100% - 24px); margin: 0; box-sizing: border-box; }

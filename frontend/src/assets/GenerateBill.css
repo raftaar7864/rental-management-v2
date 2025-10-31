@@ -1,0 +1,90 @@
+/* GenerateBill.css — High Contrast Theme */
+:root{
+  --gb-bg: #ffffff;
+  --gb-surface: #f8fafc;
+  --gb-accent: #0d6efd;
+  --gb-muted: #334155;
+  --gb-success: #198754;
+  --gb-warning: #facc15;
+  --gb-danger: #dc2626;
+  --gb-radius: 12px;
+  --gb-gap: 12px;
+  --gb-padding: 14px;
+  --gb-font-small: 0.70rem;
+  --gb-font-medium: 0.80rem;
+  --gb-font-large: 0.90rem;
+  --gb-shadow-soft: 0 6px 18px rgba(0,0,0,0.1);
+  --gb-shadow-strong: 0 12px 36px rgba(0,0,0,0.18);
+}
+
+.room-card {
+  border-radius: var(--gb-radius);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: linear-gradient(180deg, var(--gb-bg) 0%, var(--gb-surface) 100%);
+  color: var(--gb-muted);
+}
+.room-card:hover{
+  transform: translateY(-6px);
+  box-shadow: var(--gb-shadow-strong);
+}
+
+/* Card color variants */
+.room-card.default {
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  border-left: 4px solid #e5e7eb;
+}
+
+.room-card.generated {
+  background: linear-gradient(180deg, #eff6ff 0%, #dbeafe 100%);
+  border-left: 4px solid #3b82f6;
+}
+
+.room-card.paid {
+  background: linear-gradient(180deg, #ecfdf5 0%, #d1fae5 100%);
+  border-left: 4px solid #10b981;
+}
+
+.room-card.default:hover {
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.room-card.generated:hover {
+  box-shadow: 0 8px 22px rgba(37, 99, 235, 0.2);
+}
+
+.room-card.paid:hover {
+  box-shadow: 0 8px 22px rgba(16, 185, 129, 0.2);
+}
+
+.room-ribbon{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  color:#1e293b;
+}
+.room-ribbon .lucide { opacity: 0.9; }
+
+.room-card .ribbon-text{ font-weight:700; font-size:var(--gb-font-medium); }
+.room-card .tenant-line{ color:var(--gb-muted); font-size:var(--gb-font-small); }
+.room-total{ color:#0f172a; font-weight:700; font-size:var(--gb-font-large); }
+
+.small-badge{
+  padding:0.25rem 0.45rem;
+  border-radius:8px;
+  font-size:0.72rem;
+  display:inline-flex;
+  align-items:center;
+}
+.small-badge .lucide{ margin-right:6px; }
+
+.room-card .btn{ border-radius:8px; }
+.room-card .btn-outline-secondary{ border-color:rgba(15,23,42,0.1); }
+.room-card hr{ margin:10px 0; border-top:1px solid rgba(15,23,42,0.08); }
+
+@media(max-width:767px){
+  .room-total{ font-size:1rem; }
+  .room-card{ padding:6px; }
+}
