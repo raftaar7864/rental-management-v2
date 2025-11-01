@@ -12,6 +12,7 @@ const app = express();
 const allowedOrigins = [
   'http://localhost:5173',
   'https://rental-management-v2.vercel.app',
+  'https://rental-management-v2.onrender.com'
 ];
 
 app.use(
