@@ -1,28 +1,17 @@
 // BuildingService.js
-import axios from "axios";
+import api from "../api/axios";
 
-const API_URL = import.meta.env.VITE_API_URL + "/buildings"; // ✅ Works on Vercel + Local
+const API_URL = "/buildings";
 
-const authHeader = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  return user?.token ? { Authorization: `Bearer ${user.token}` } : {};
-};
+// ✅ Get all buildings
+export const getBuildings = () => api.get(API_URL);
 
-// ✅ Get buildings
-export const getBuildings = () => {
-  return axios.get(API_URL, { headers: authHeader() });
-};
+// ✅ Alias (optional)
+export const getAllBuildings = () => api.get(API_URL);
 
-export const getAllBuildings = () => {
-  return axios.get(API_URL, { headers: authHeader() });
-};
+// ✅ Create a building
+export const createBuilding = (data) => api.post(API_URL, data);
 
-// ✅ Create building
-export const createBuilding = (data) => {
-  return axios.post(API_URL, data, { headers: authHeader() });
-};
-
-// ✅ Update building
-export const updateBuilding = (id, data) => {
-  return axios.put(`${API_URL}/${id}`, data, { headers: authHeader() });
-};
+// ✅ Update a building
+export const updateBuilding = (id, data) =>
+  api.put(`${API_URL}/${id}`, data);
