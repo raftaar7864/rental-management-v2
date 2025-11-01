@@ -1,31 +1,28 @@
 // BuildingService.js
 import axios from "axios";
 
-// Dynamically switch between local & production
-const API_URL ="https://rental-management-v2.onrender.com/api";
-    
-const API_URL = `${API_BASE_URL}/buildings`;
+const API_URL = import.meta.env.VITE_API_URL + "/buildings"; // ✅ Works on Vercel + Local
 
+const authHeader = () => {
+  const user = JSON.parse(localStorage.getItem("user"));
+  return user?.token ? { Authorization: `Bearer ${user.token}` } : {};
+};
+
+// ✅ Get buildings
 export const getBuildings = () => {
-  return axios.get(API_URL);
+  return axios.get(API_URL, { headers: authHeader() });
 };
 
 export const getAllBuildings = () => {
-  return axios.get(API_URL);
-};
-/**
- * Create a building
- * @param {{ name: string, address: string }} data
- */
-export const createBuilding = (data) => {
-  return axios.post(API_URL, data);
+  return axios.get(API_URL, { headers: authHeader() });
 };
 
-/**
- * Update a building
- * @param {string} id
- * @param {{ name?: string, address?: string }} data
- */
+// ✅ Create building
+export const createBuilding = (data) => {
+  return axios.post(API_URL, data, { headers: authHeader() });
+};
+
+// ✅ Update building
 export const updateBuilding = (id, data) => {
-  return axios.put(`${API_URL}/${id}`, data);
+  return axios.put(`${API_URL}/${id}`, data, { headers: authHeader() });
 };
