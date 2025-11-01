@@ -2,10 +2,7 @@
 import axios from "axios";
 
 // Dynamically switch between local & production
-const API_BASE_URL =
-  import.meta.env.MODE === "development"
-    ? "http://localhost:5000/api"
-    : "https://rental-management-v2.onrender.com/api"; 
+const API_URL ="https://rental-management-v2.onrender.com/api";
     
 const API_URL = `${API_BASE_URL}/buildings`;
 
