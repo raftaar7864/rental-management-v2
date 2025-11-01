@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || 'https://rental-management-v2.onrender.com/api',
   timeout: 30_000,
   headers: {
     'Content-Type': 'application/json'
