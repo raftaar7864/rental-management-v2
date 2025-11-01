@@ -199,7 +199,7 @@ export default function GenerateBill() {
   const fetchRoomsForMonth = async (buildingId, yyyyMm) => {
     try {
       setLoadingRooms(true);
-      const getRoomsFn = RoomService.getRoomsByBuilding ?? RoomService.getRooms;
+      const getRoomsFn = RoomService.getRoomsByBuilding ?? RoomService.getRoom;
       const resRooms = await getRoomsFn(buildingId);
       const roomsData = safeData(resRooms) || [];
 
