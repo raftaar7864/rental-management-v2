@@ -1,12 +1,14 @@
 // BuildingService.js
 import axios from "axios";
 
-const API_URL = "http://localhost:5000/api/buildings";
+// Dynamically switch between local & production
+const API_BASE_URL =
+  import.meta.env.MODE === "development"
+    ? "http://localhost:5000/api"
+    : "https://rental-management-v2.onrender.com/api"; 
+    
+const API_URL = `${API_BASE_URL}/buildings`;
 
-/**
- * Get all buildings
- * returns axios promise
- */
 export const getBuildings = () => {
   return axios.get(API_URL);
 };
