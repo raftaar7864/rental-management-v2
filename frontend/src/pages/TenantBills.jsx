@@ -87,7 +87,7 @@ export default function TenantBills() {
           className="mb-4"
         >
          <img
-            src="../src/assets/home.gif"
+            src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExcW9xZHp5aHozb3BrMm1tY2w2bzVzNG1lc2E4ZGs2d21meWVjNHQyNiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/L2BSJXbYiZlXSUKQGY/giphy.gif"
             alt="Tenant Dashboard"
             style={{ width: 100, marginBottom: 10 }}
           /> 
